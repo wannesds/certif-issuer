@@ -6,15 +6,15 @@ import {
     getSourceUrl,
     saveSolidDatasetAt,
     setThing,
-    AddOfType,
   } from "@inrupt/solid-client";
-import { useSession } from "@inrupt/solid-ui-react";
 
 const TEXT_PREDICATE = "http://schema.org/text";
 const CREATED_PREDICATE = "http://www.w3.org/2002/12/cal/ical#created";
 const SHA1_PREDICATE = "http://xmlns.com/foaf/0.1/sha1";
+const PERSON_PREDICATE = "http://xmlns.com/foaf/0.1/Person";
 const TYPE_PREDICATE = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type";
 const CERTIFICATION_CLASS = "http://data.europa.eu/snb/credential/e34929035b";
+
 
 function StoreCertif(data, validTxn, certifListStored, setCertifListStored, session) {
     console.log('storeCertif-data : ', data, validTxn, certifListStored)
@@ -29,8 +29,9 @@ console.log('session:',session)
         const certifWithText = addStringNoLocale(createThing(), TEXT_PREDICATE, data.certifID);
         const certifWithDate = addDatetime(certifWithText, CREATED_PREDICATE, new Date() );
         const certifWithHash = addStringNoLocale(certifWithDate, SHA1_PREDICATE, validTxn.hash);
+        const certifWithPerson = addStringNoLocale(certifWithHash, PERSON_PREDICATE, data.webID);
         //adds correct class
-        const certifWithType = addUrl(certifWithHash, TYPE_PREDICATE, CERTIFICATION_CLASS);
+        const certifWithType = addUrl(certifWithPerson, TYPE_PREDICATE, CERTIFICATION_CLASS);
         //updates certification list with newly added thing
         const updatedCertifList = setThing(certifListStored, certifWithType);
         //saves dataset on Pod
