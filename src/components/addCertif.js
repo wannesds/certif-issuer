@@ -4,9 +4,10 @@ function AddCertif({ certifListQue, setCertifListQue }) {
   const [certifID, setCertifID] = useState("");
   const [webID, setWebID] = useState("");
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     const newCertif = {certifID : certifID, webID : webID}
+    
     setCertifListQue(certifListQue => [...certifListQue, newCertif])
   };
 

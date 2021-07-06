@@ -33,7 +33,7 @@ function App() {
       const profileThing = getThing(profileDataset, session.info.webId);
       const podsUrls = getUrlAll(profileThing, STORAGE_PREDICATE);
       const pod = podsUrls[0];
-      const containerUri = `${pod}issued-certificates/`;
+      const containerUri = `${pod}certificates-issued/`;
       const list = await getOrCreateCertifList(containerUri, session.fetch);
       setCertifListStored(list);
 
@@ -95,7 +95,13 @@ function App() {
             
             <div className="certification-lists">
               <StoredList certifListStored={certifListStored} />
-              <QueList certifListQue={certifListQue} />
+              <QueList 
+                certifListQue={certifListQue} 
+                setCertifListQue={setCertifListQue}
+                certifListStored={certifListStored}
+                setCertifListStored={setCertifListStored}
+                session={session}
+              />
             </div>
           </section>
         </CombinedDataProvider>

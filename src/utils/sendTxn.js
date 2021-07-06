@@ -10,8 +10,8 @@ export async function SendTxn(data){
         const txHash = "";//not nessecary?
 
         try {   const user = window.ethereum.selectedAddress;
-                const option = `https://api-rinkeby.etherscan.io/api?module=proxy&action=eth_gasPrice&apikey=`;
-                const currentGas = await FetchEthApi(option);
+                const apiOption = `https://api-rinkeby.etherscan.io/api?module=proxy&action=eth_gasPrice&apikey=`;
+                const currentGas = await FetchEthApi(apiOption);
                 const toBeStoredHash = CreateHash(data);
                 
                 const transactionParameters = {

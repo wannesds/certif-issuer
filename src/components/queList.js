@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import QueItem from '../components/queItem';
 
-function QueList({certifListQue}){
+function QueList({certifListQue, setCertifListQue, certifListStored, setCertifListStored, session}){
    
 
     return(
@@ -18,8 +18,16 @@ function QueList({certifListQue}){
                 </thead>
                 <tbody>
                     { !certifListQue ? <span>There are no certificates ready to be stored.</span> 
-                        : certifListQue.map( item => 
-                            <QueItem data={item}/>
+                        : certifListQue.map( (item) => 
+                            <QueItem 
+                                id={item.id} 
+                                data={item} 
+                                certifListStored={certifListStored}
+                                setCertifListStored={setCertifListStored}
+                                certifListQue={certifListQue}
+                                setCertifListQue={setCertifListQue}
+                                session={session}
+                            />
                         )
                     }
                 </tbody>
