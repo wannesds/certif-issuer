@@ -1,13 +1,13 @@
-import React, {useState, useEffect} from 'react';
 import CreateHash  from '../utils/createHash';
-import reactDom from 'react-dom';
-import { FetchTxns } from '../utils/fetchTxns';
+import { FetchEthApi } from './fetchEthApi';
 
 async function CheckIfValid(data){
     try {
-        const array = await FetchTxns(res => res)
+        const user = window.ethereum.selectedAddress;
+        const option = `https://api-rinkeby.etherscan.io/api?module=account&action=txlist&address=${user}&startblock=0&endblock=99999999&sort=asc&apikey=`;
+        const array = await FetchEthApi(option)
         //console.log('checkIfValid :' , chainData, chainData.txnList)
-        const hash = CreateHash(data, (resHash => resHash))
+        const hash = CreateHash(data)
         //checks if qued certificate hash is included in a Txn on-chain
         //this means the certif is stored succesfully on-chain
         const validTxn = array.result.find((resTxn) => resTxn.input === '0x' + hash)
@@ -15,7 +15,8 @@ async function CheckIfValid(data){
 
         return {state: state, validTxn: validTxn}
     } catch {
-
+        console.log("checkIfValid has failed")
+        return null;
     }
     
 }

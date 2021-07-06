@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { SendTxn } from '../utils/sendTxns';
+import { SendTxn } from '../utils/sendTxn';
 import  CheckIfValid  from '../utils/checkIfValid';
 
 function QueItem({data}){
@@ -12,7 +12,7 @@ function QueItem({data}){
 
     const handleCheckIfValid = async () => {
         try {
-            const result = await CheckIfValid(data, (res => res))
+            const result = await CheckIfValid(data)
         console.log('validcheck result : ', result)
         setChainValid(result.state)
         setValidTxn(result.validTxn)
