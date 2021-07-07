@@ -6,7 +6,10 @@ function AddCertif({ certifListQue, setCertifListQue }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const newCertif = {certifID : certifID, webID : webID}
+    const newCertif = {
+      certifID : certifID,
+      webID : webID
+    }
     
     setCertifListQue(certifListQue => [...certifListQue, newCertif])
   };

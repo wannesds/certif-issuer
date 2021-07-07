@@ -15,8 +15,6 @@ const TYPE_PREDICATE = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type";
 const CERTIFICATION_CLASS = "http://data.europa.eu/snb/credential/e34929035b";
 
 function StoredList({certifListStored}){
-
-    console.log("certifList : ",certifListStored)
     
     //const { fetch } = useSession();
 

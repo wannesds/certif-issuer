@@ -19,7 +19,6 @@ const CERTIFICATION_CLASS = "http://data.europa.eu/snb/credential/e34929035b";
 function StoreCertif(data, validTxn, certifListStored, setCertifListStored, session) {
     console.log('storeCertif-data : ', data, validTxn, certifListStored)
     
-console.log('session:',session)
     const store = async () => {
         try {
         console.log('test');

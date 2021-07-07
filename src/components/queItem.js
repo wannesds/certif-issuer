@@ -6,13 +6,16 @@ import StoreCertif from '../utils/storeCertif';
 function QueItem({id, data, certifListStored, setCertifListStored, certifListQue, setCertifListQue, session}){
     const [chainValid, setChainValid] = useState("");
     const [validTxn, setValidTxn] = useState("");
+    console.log("data.id : ",id)
 
     const handleSendTxn = () => {
         SendTxn(data)
     }
 
     const deleteQueItem = () => {
-        const resCertifList = certifListQue.splice(id, id + 1)
+        const resCertifList = certifListQue.slice(0, id).concat(certifListQue.slice(id + 1, certifListQue.length + 1))
+
+        console.log('resCertifList : ', id, resCertifList)
         setCertifListQue(resCertifList);
     }
 
