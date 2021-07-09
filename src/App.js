@@ -10,7 +10,7 @@ import AddCertif from "./components/addCertif";
 const STORAGE_PREDICATE = "http://www.w3.org/ns/pim/space#storage";
 
 const authOptions = {
-  clientName: "Certif-create App",
+  clientName: "Certif-Issuer App",
 };
 
 function App() {
@@ -93,16 +93,14 @@ function App() {
 
             <AddCertif certifListQue={certifListQue} setCertifListQue={setCertifListQue} />
             
-            <div className="certification-lists">
-              <StoredList certifListStored={certifListStored} />
-              <QueList 
-                certifListQue={certifListQue} 
-                setCertifListQue={setCertifListQue}
-                certifListStored={certifListStored}
-                setCertifListStored={setCertifListStored}
-                session={session}
-              />
-            </div>
+            <QueList 
+              certifListQue={certifListQue} 
+              setCertifListQue={setCertifListQue}
+              certifListStored={certifListStored}
+              setCertifListStored={setCertifListStored}
+              session={session}
+            />
+            <StoredList certifListStored={certifListStored} />
           </section>
         </CombinedDataProvider>
       ) : (  //if not logged in then

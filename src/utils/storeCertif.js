@@ -5,8 +5,9 @@ import {
     createThing,
     getSourceUrl,
     saveSolidDatasetAt,
-    setThing,
+    setThing
   } from "@inrupt/solid-client";
+import { AddReadAccess } from './addReadAccess';
 
 const TEXT_PREDICATE = "http://schema.org/text";
 const CREATED_PREDICATE = "http://www.w3.org/2002/12/cal/ical#created";
@@ -34,9 +35,13 @@ function StoreCertif(data, validTxn, certifListStored, setCertifListStored, sess
         //updates certification list with newly added thing
         const updatedCertifList = setThing(certifListStored, certifWithType);
         //saves dataset on Pod
+        const userId = data.webID;
+        AddReadAccess(certifListStored, session, userId);
+
         const updatedDataset = await saveSolidDatasetAt(indexUrl, updatedCertifList, {
             fetch: session.fetch,
         });
+        
         setCertifListStored(updatedDataset)
         console.log("Certif added to pod :", data.certifID);
         } catch {

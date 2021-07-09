@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import QueItem from '../components/queItem';
 
 function QueList({certifListQue, setCertifListQue, certifListStored, setCertifListStored, session}){
-    console.log("certifListQue", certifListQue)
+   
 
     return(
         <div className="table-container">
@@ -17,17 +17,17 @@ function QueList({certifListQue, setCertifListQue, certifListStored, setCertifLi
                     </tr>
                 </thead>
                 <tbody>
-                    { !certifListQue ? <span>There are no certificates ready to be stored.</span> 
-                        : certifListQue.map((item, index) => 
+                    { !certifListQue ? <span>no</span>
+                        : certifListQue.map( (item, index) => 
                             <QueItem 
-                                key={index}
-                                id={index}
+                                id={index} 
                                 data={item} 
                                 certifListStored={certifListStored}
                                 setCertifListStored={setCertifListStored}
                                 certifListQue={certifListQue}
                                 setCertifListQue={setCertifListQue}
                                 session={session}
+                                key={index}
                             />
                         )
                     }
