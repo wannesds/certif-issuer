@@ -3,11 +3,8 @@ import CreateHash from './createHash';
 import { FetchEthApi } from './fetchEthApi';
 
 export async function SendTxn(data){ 
-    console.log("sendTxn data :", data)
-    const web3 = new Web3("https://eth-rinkeby.alchemyapi.io/v2/aOmf3RlJunKUJcRWbVXWMdZukj_SMvTl");
     if (window.ethereum) {
         window.web3 = new Web3("https://eth-rinkeby.alchemyapi.io/v2/aOmf3RlJunKUJcRWbVXWMdZukj_SMvTl");
-        const txHash = "";//not nessecary?
 
         try {   const user = window.ethereum.selectedAddress;
                 const apiOption = `https://api-rinkeby.etherscan.io/api?module=proxy&action=eth_gasPrice&apikey=`;
@@ -27,7 +24,7 @@ export async function SendTxn(data){
                 };
                 // txHash is a hex string
                 // "As with any RPC call, it may throw an error"
-                const resTxHash = window.ethereum.request({
+                window.ethereum.request({
                     //transaction gets signed with Browser Wallet
                     method: 'eth_sendTransaction',
                     params: [transactionParameters],

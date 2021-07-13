@@ -31,27 +31,21 @@ export async function AddReadAccess(certifListStored, session, userId){
         console.log("myDatasetWithAcl :", myDatasetWithAcl)
 
         const resourceAcl = getResourceAcl(myDatasetWithAcl);
-
+        //console.log("resourceAcl", resourceAcl)
+        console.log("hasAcl?", hasAcl(myDatasetWithAcl))
+        console.log("userId", userId)
+        console.log("session", session)
         const updatedAcl = setAgentResourceAccess(
             resourceAcl,
             userId,
             { read: true, append: false, write: false, control: false }
         );
-
+        console.log("updatedAcl : ", updatedAcl)
         await saveAclFor(myDatasetWithAcl, updatedAcl , {
             fetch: session.fetch
         });
 
-        console.log("hasAcl?", hasAcl(myDatasetWithAcl))
-        console.log("resourceAcl", resourceAcl)
        
-       // const accessByAgent = getAgentAccess(myDatasetWithAcl, "https://ksbuser.solidcommunity.net/profile/card#me");
-        //currently testing with reading Access instead of writing new accesses
-
-  
-//   // Now save the ACL:
-         //await saveAclFor(myDatasetWithAcl, updatedAcl);
-        //console.log("accesByGroup test : ", accessByAgent)
     } catch {
         console.log("AddReadAccess has failed")
     }

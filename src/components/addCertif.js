@@ -22,6 +22,7 @@ function AddCertif({ certifListQue, setCertifListQue }) {
     if (e.target.id === "webID-input"){
       setWebID(e.target.value) 
     }
+    console.log("addCertif webID : ", webID)
     //`set${e.target.id}(e.target.value) -> would be better way but doesnt work;
   };
 

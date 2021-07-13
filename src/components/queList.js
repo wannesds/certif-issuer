@@ -3,7 +3,7 @@ import QueItem from '../components/queItem';
 
 function QueList({certifListQue, setCertifListQue, certifListStored, setCertifListStored, session}){
    
-
+    console.log("quelist certifListQue : ", certifListQue)
     return(
         <div className="table-container">
             <span className="tasks-message">
