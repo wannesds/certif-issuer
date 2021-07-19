@@ -4,8 +4,7 @@ import {
     getUrl, 
     getDatetime,
 } from "@inrupt/solid-client";
-import { Table, TableColumn } from "@inrupt/solid-ui-react";
-// import QueItem from './queItem';
+import StoredItem from './storedItem';
 
 const TEXT_PREDICATE = "http://schema.org/text";
 const CREATED_PREDICATE = "http://www.w3.org/2002/12/cal/ical#created";
@@ -25,46 +24,40 @@ function StoredList({certifListStored}){
         );
     });
 
-    const thingsArray = certifThings
-        //filters for todo-type predicates, (don't think this is needed in current version) but it can be an extra check
-        .filter((t) => getUrl(t, TYPE_PREDICATE) === CERTIFICATION_CLASS)
-        .map((t) => {
-            return { dataset: certifListStored, thing: t }; 
+    // const thingsArray = certifThings
+    //     //filters for todo-type predicates, (don't think this is needed in current version) but it can be an extra check
+    //     .filter((t) => getUrl(t, TYPE_PREDICATE) === CERTIFICATION_CLASS)
+    //     .map((t) => {
+    //         return { dataset: certifListStored, thing: t }; 
         
-        });
+    //     });
 
    
     return(
         <div className="table-container">
             <span className="tasks-message">
-            You have {certifThings.length} certificates stored.
+            There {certifThings.length === 1 ? "is" : "are"} {certifThings.length} certificate{certifThings.length === 1 ? "" : "s"} ready to be stored.
             </span>
-            { !certifListStored ? <span>There are no certificates stored.</span> : 
-            <Table className="table" things={thingsArray}>
-                <TableColumn 
-                    property={TEXT_PREDICATE} 
-                    header="Certificate" 
-                    sortable
-                />
-                <TableColumn 
-                    property={PERSON_PREDICATE} 
-                    header="WebID" 
-                    sortable
-                />
-                <TableColumn
-                    property={SHA1_PREDICATE}
-                    header="Validation Hash"
-                />
-                <TableColumn
-                    property={CREATED_PREDICATE}
-                    dataType="datetime"
-                    header="Created At"
-                    body={({ value }) => value.toDateString()}
-                    sortable
-                />
-                
-            </Table>
-            }
+            <table className="table">
+                <thead>
+                    <tr>
+                        <th>Certificate</th>
+                        <th>WebID</th>
+                        <th>Validation Hash</th>
+                        <th>Created</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    { !certifThings ? <span>No certificates stored</span>
+                        : certifThings.map( (item, index) => 
+                            <StoredItem 
+                                thing={item}
+                                key={index}
+                            />
+                        )
+                    }
+                </tbody>
+            </table>
         </div>
     );
 }

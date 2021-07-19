@@ -7,7 +7,7 @@ function QueList({certifListQue, setCertifListQue, certifListStored, setCertifLi
     return(
         <div className="table-container">
             <span className="tasks-message">
-            There are {certifListQue.length} certificates ready to be stored.
+            There {certifListQue.length === 1 ? "is" : "are"} {certifListQue.length} certificate{certifListQue.length === 1 ? "" : "s"} ready to be stored.
             </span>
             <table className="table">
                 <thead>

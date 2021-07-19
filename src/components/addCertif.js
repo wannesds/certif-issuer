@@ -20,7 +20,7 @@ function AddCertif({ certifListQue, setCertifListQue }) {
       setCertifID(e.target.value)
     } 
     if (e.target.id === "webID-input"){
-      setWebID(e.target.value) 
+      setWebID(`https://${e.target.value}/profile/card#me`) 
     }
     console.log("addCertif webID : ", webID)
     //`set${e.target.id}(e.target.value) -> would be better way but doesnt work;

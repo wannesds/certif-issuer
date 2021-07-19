@@ -87,12 +87,15 @@ function App() {
                 ]} 
                 className="ma2 dark-blue"
               />
-              <LogoutButton/>
+              <LogoutButton
+                onLogout={() => window.location.reload()}
+              />
           </div>
-          <section>
-
-            <AddCertif certifListQue={certifListQue} setCertifListQue={setCertifListQue} />
-            
+          <div className="content">
+            <AddCertif 
+              certifListQue={certifListQue} 
+              setCertifListQue={setCertifListQue}
+            />
             <QueList 
               certifListQue={certifListQue} 
               setCertifListQue={setCertifListQue}
@@ -101,7 +104,7 @@ function App() {
               session={session}
             />
             <StoredList certifListStored={certifListStored} />
-          </section>
+          </div>
         </CombinedDataProvider>
       ) : (  //if not logged in then
         <div className="message">
