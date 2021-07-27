@@ -36,7 +36,7 @@ function StoredList({certifListStored}){
     return(
         <div className="table-container">
             <span className="tasks-message">
-            There {certifThings.length === 1 ? "is" : "are"} {certifThings.length} certificate{certifThings.length === 1 ? "" : "s"} ready to be stored.
+            There {certifThings.length === 1 ? "is" : "are"} {certifThings.length} certificate{certifThings.length === 1 ? "" : "s"} issued.
             </span>
             <table className="table">
                 <thead>

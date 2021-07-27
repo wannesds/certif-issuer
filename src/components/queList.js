@@ -14,6 +14,7 @@ function QueList({certifListQue, setCertifListQue, certifListStored, setCertifLi
                     <tr>
                         <th>Certificate</th>
                         <th>WebID</th>
+                        <th>Valid</th>
                     </tr>
                 </thead>
                 <tbody>

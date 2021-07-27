@@ -41,8 +41,8 @@ function QueItem({id, data, certifListStored, setCertifListStored, certifListQue
         <tr>
             <td>{data.certifID}</td>
             <td>{data.webID}</td>
-            <button onClick={handleSendTxn}>Store on chain</button>
-            <span>On chain? : {chainValid ? "yes" : "no"}</span> {/*temporary*/}
+            <td>{chainValid ? "yes" : "no"}</td> {/*temporary*/
+            <button hidden={chainValid} onClick={handleSendTxn}>Store on chain</button>}
             <button hidden={chainValid} onClick={handleCheckIfValid}>Verify on chain</button>{/* show only when stored on chain */}
             <button hidden={!validTxn} onClick={handleStoreCertif}>Store on pod</button> {/* show only when verified on chain */}
             <button onClick={deleteQueItem}>X</button>
