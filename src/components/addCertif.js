@@ -1,6 +1,6 @@
 import React, {useState } from "react";
 
-function AddCertif({ certifListQue, setCertifListQue }) {
+function AddCertif({ setCertifListQue }) {
   const [certifID, setCertifID] = useState("");
   const [webID, setWebID] = useState("");
 

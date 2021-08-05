@@ -2,8 +2,9 @@ import './App.css';
 import React, { useEffect, useState } from "react";
 import { LoginButton, LogoutButton, Text, useSession, CombinedDataProvider } from "@inrupt/solid-ui-react";
 import { getSolidDataset, getUrlAll, getThing } from "@inrupt/solid-client";
-import { getOrCreateCertifList } from "./utils/getOrCreateCertifList";
+import { getOrCreateHolderList } from "./utils/getOrCreateHolderList";
 import StoredList from "./components/storedList";
+import UserList from "./components/userList";
 import QueList from "./components/queList";
 import AddCertif from "./components/addCertif";
 
@@ -17,6 +18,8 @@ function App() {
 
   const { session } = useSession();
   const [oidcIssuer, setOidcIssuer] = useState("");
+  //certifListStored will become an array of dataset things, UserListStored
+  const [userListStored, setUserListStored] = useState("");
   const [certifListStored, setCertifListStored] = useState("");
   const [certifListQue, setCertifListQue] = useState("");
 
@@ -34,8 +37,9 @@ function App() {
       const podsUrls = getUrlAll(profileThing, STORAGE_PREDICATE);
       const pod = podsUrls[0];
       const containerUri = `${pod}certificates-issued/`;
-      const list = await getOrCreateCertifList(containerUri, session.fetch);
-      setCertifListStored(list);
+      const list = await getOrCreateHolderList(containerUri, session.fetch);
+      setUserListStored(list);
+      console.log("list:", userListStored)
 
       
         const Web3 = require('web3');
@@ -69,7 +73,6 @@ function App() {
     
   }, [session, session.info.isLoggedIn]);
 
-  
 
   return (
     <div className="app-container">
@@ -100,6 +103,12 @@ function App() {
               certifListQue={certifListQue} 
               setCertifListQue={setCertifListQue}
               certifListStored={certifListStored}
+              setCertifListStored={setCertifListStored}
+              setUserListStored={setUserListStored}
+              session={session}
+            />
+            <UserList 
+              userListStored={userListStored}
               setCertifListStored={setCertifListStored}
               session={session}
             />
