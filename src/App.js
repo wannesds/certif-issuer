@@ -1,4 +1,5 @@
 import './App.css';
+import './styles/styles.scss';
 import React, { useEffect, useState } from "react";
 import { LoginButton, LogoutButton, Text, useSession, CombinedDataProvider } from "@inrupt/solid-ui-react";
 import { getSolidDataset, getUrlAll, getThing } from "@inrupt/solid-client";
@@ -79,37 +80,43 @@ function App() {
           datasetUrl={session.info.webId}
           thingUrl={session.info.webId}
         >
-          <div className="message logged-in f4">
+          <div className="message logged-in">
             <span>You are logged in as: </span>
               <Text 
                 properties={[
                   "http://www.w3.org/2006/vcard/ns#fn",
                   "http://xmlns.com/foaf/0.1/name",
                 ]} 
-                className="ma2 dark-blue"
+                className=""
               />
               <LogoutButton
                 onLogout={() => window.location.reload()}
               />
           </div>
           <div className="content">
-            <AddCertif 
-              certifListQue={certifListQue} 
-              setCertifListQue={setCertifListQue}
-            />
-            <QueList 
-              certifListQue={certifListQue} 
-              setCertifListQue={setCertifListQue}
-              setCertifListStored={setCertifListStored}
-              setUserListStored={setUserListStored}
-              session={session}
-            />
-            <UserList 
-              userListStored={userListStored}
-              setCertifListStored={setCertifListStored}
-              session={session}
-            />
-            <StoredList certifListStored={certifListStored} />
+            <h3>Local Data</h3>
+            <div className="local-content">        
+              <AddCertif 
+                certifListQue={certifListQue} 
+                setCertifListQue={setCertifListQue}
+              />
+              <QueList 
+                certifListQue={certifListQue} 
+                setCertifListQue={setCertifListQue}
+                setCertifListStored={setCertifListStored}
+                setUserListStored={setUserListStored}
+                session={session}
+              />
+            </div>
+            <h3>Solid Data</h3>
+            <div className="solid-content">              
+              <UserList 
+                userListStored={userListStored}
+                setCertifListStored={setCertifListStored}
+                session={session}
+              />
+              <StoredList certifListStored={certifListStored} />
+            </div>
           </div>
         </CombinedDataProvider>
       ) : (  //if not logged in then

@@ -27,14 +27,16 @@ function AddCertif({ setCertifListQue }) {
   };
 
   return (
-      <form onSubmit={handleSubmit} className="todo-form">
+      <form onSubmit={handleSubmit} className="form">
         <label htmlFor="todo-input">
+          <span>Certificate</span>
           <input
             id="certifID-input"
             type="text"
             //value={todoText}
             onChange={handleChange}
           />
+          <span>WebID</span>
           <input
             id="webID-input"
             type="text"

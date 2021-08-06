@@ -1,0 +1,75 @@
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap");
+
+$Inconsolata: 'Inconsolata', monospace;
+$Roboto: 'Roboto', sans-serif;
+
+$white1: #fcfbfd;
+$white2: #eff2f5;
+$border: #5c6570;
+
+
+
+.app-container {
+    font-family: $Roboto;
+    background-color: $white1;
+    padding: 0 4vw;
+    min-height: 100vh;
+}
+.message {
+    //background-color: rgba(0, 128, 0, 0.685);
+    display: flex;
+    justify-content:center;
+    padding-top: 2vh;
+}
+
+.content {
+    //background-color: rgba(255, 255, 0, 0.705);
+    padding: 0 1em;
+    min-height: 70vh;
+    h3 {
+        margin: 0.5em 0;
+    }
+}
+.local-content{
+    //background-color:rgba(128, 0, 128, 0.877);
+    min-height: 15vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:space-between;
+    border: $border solid 2px;
+    padding: 0.5em;
+    background-color: $white2;
+}
+.solid-content {
+    //background-color:rgba(55, 190, 190, 0.856);
+    border: $border solid 2px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    min-height: 54vh;
+    padding: 0.5em;
+    background-color: $white2;
+
+}
+.table-container, form{
+    min-width: 36vw;
+    //background-color: rgba(0, 0, 255, 0.623);
+}
+.form {
+    //background-color: red;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: left;
+    input {
+        width: 15em;
+    }
+    span {
+        margin: 0.5em;
+    }
+}
+.add-button {
+    width: 20em;
+    height: 2.5em;
+    margin: 2em;
+}

@@ -6,7 +6,7 @@ function QueList({certifListQue, setCertifListQue, setCertifListStored, setUserL
     console.log("quelist certifListQue : ", certifListQue)
     return(
         <div className="table-container">
-            <span className="tasks-message">
+            <span className="table-message">
             There {certifListQue.length === 1 ? "is" : "are"} {certifListQue.length} certificate{certifListQue.length === 1 ? "" : "s"} ready to be stored.
             </span>
             <table className="table">
@@ -18,7 +18,7 @@ function QueList({certifListQue, setCertifListQue, setCertifListStored, setUserL
                     </tr>
                 </thead>
                 <tbody>
-                    { !certifListQue ? <span>no</span>
+                    { !certifListQue ? []
                         : certifListQue.map( (item, index) => 
                             <QueItem 
                                 id={index} 

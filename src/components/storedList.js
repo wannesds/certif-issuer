@@ -3,6 +3,8 @@ import {
     getThingAll, 
     getUrl, 
     getDatetime,
+    getResourceUrl,
+    getResourceInfo
 } from "@inrupt/solid-client";
 import StoredItem from './storedItem';
 
@@ -16,6 +18,7 @@ const CERTIFICATION_CLASS = "http://data.europa.eu/snb/credential/e34929035b";
 function StoredList({certifListStored}){
     
     //const { fetch } = useSession();
+    
 
     const certifThings = certifListStored ? getThingAll(certifListStored) : [];
     certifThings.sort((a, b) => {
@@ -23,6 +26,13 @@ function StoredList({certifListStored}){
           getDatetime(a, CREATED_PREDICATE) - getDatetime(b, CREATED_PREDICATE)
         );
     });
+
+    let user = '';
+    if (certifListStored) {
+        const rawUrl = certifThings[0].url.split("/")[4];
+        user = rawUrl.split("#")[0].slice(0, -4);
+    }
+    console.log("TEST", user)
 
     // const thingsArray = certifThings
     //     //filters for todo-type predicates, (don't think this is needed in current version) but it can be an extra check
@@ -35,8 +45,10 @@ function StoredList({certifListStored}){
    
     return(
         <div className="table-container">
-            <span className="tasks-message">
-            There {certifThings.length === 1 ? "is" : "are"} {certifThings.length} certificate{certifThings.length === 1 ? "" : "s"} issued.
+            <span className="table-message">
+            {!user ? "No Holder selected" : 
+                `${user} has ${certifThings.length} certificate${certifThings.length === 1 ? "" : "s"} issued.`
+            }
             </span>
             <table className="table">
                 <thead>
