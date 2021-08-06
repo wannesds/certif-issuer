@@ -9,7 +9,7 @@ import {
     getDatetime,
 } from "@inrupt/solid-client";
 
-function QueItem({id, data, certifListStored, setCertifListStored, certifListQue, setCertifListQue, setUserListStored, session}){
+function QueItem({id, data, setCertifListStored, certifListQue, setCertifListQue, setUserListStored, session}){
     const [chainValid, setChainValid] = useState("");
     const [validTxn, setValidTxn] = useState("");
 
@@ -36,7 +36,7 @@ function QueItem({id, data, certifListStored, setCertifListStored, certifListQue
 
     const handleStoreCertif = async () => {
         try {
-            await StoreCertif(data, validTxn, certifListStored, setCertifListStored, setUserListStored, session)
+            await StoreCertif(data, validTxn, setCertifListStored, setUserListStored, session)
         } catch {
             console.log("Storing to Pod has Failed (handleStoreCertif)")
         }

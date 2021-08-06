@@ -35,12 +35,10 @@ function App() {
       });
       const profileThing = getThing(profileDataset, session.info.webId);
       const podsUrls = getUrlAll(profileThing, STORAGE_PREDICATE);
-      const pod = podsUrls[0];
+      const pod = podsUrls[0]
       const containerUri = `${pod}certificates-issued/`;
-      const list = await getOrCreateHolderList(containerUri, session.fetch);
-      setUserListStored(list);
-      console.log("list:", userListStored)
-
+      const holders = await getOrCreateHolderList(containerUri, session.fetch);
+      setUserListStored(holders);
       
         const Web3 = require('web3');
         const web3 = new Web3("https://eth-rinkeby.alchemyapi.io/v2/aOmf3RlJunKUJcRWbVXWMdZukj_SMvTl");
@@ -102,7 +100,6 @@ function App() {
             <QueList 
               certifListQue={certifListQue} 
               setCertifListQue={setCertifListQue}
-              certifListStored={certifListStored}
               setCertifListStored={setCertifListStored}
               setUserListStored={setUserListStored}
               session={session}

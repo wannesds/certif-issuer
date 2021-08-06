@@ -12,21 +12,13 @@ import {
   } from "@inrupt/solid-client";
 
   
-export async function AddReadAccess(session, userId){
+export async function AddReadAccess(session, userID, ttlUri){
     const STORAGE_PREDICATE = "http://www.w3.org/ns/pim/space#storage";
 
     try {
-        const profileDataset = await getSolidDataset(session.info.webId, {
+  
+        const myDataset = await getSolidDatasetWithAcl(ttlUri, {
             fetch: session.fetch,
-        });
-        const profileThing = getThing(profileDataset, session.info.webId);
-        const podsUrls = getUrlAll(profileThing, STORAGE_PREDICATE);
-        const pod = podsUrls[0];
-        const containerUri = `${pod}certificates-issued/index.ttl`
-        //had to do these steps to get correct link, might be able to get it from session tho
-        
-        const myDataset = await getSolidDatasetWithAcl(containerUri, {
-            fetch: session.fetch
         }); 
         let resourceAcl = "";
         if (hasResourceAcl(myDataset)) {
@@ -37,12 +29,12 @@ export async function AddReadAccess(session, userId){
         
         const updatedAcl = setAgentResourceAccess(
             resourceAcl,
-            userId,
+            userID,
             { read: true, append: false, write: false, control: false }
         );
-        console.log("updatedAcl : ", updatedAcl)
+
         await saveAclFor(myDataset, updatedAcl , {
-            fetch: session.fetch
+            fetch: session.fetch,
         });
         /////// VVVVV to be deleted VVVVV
         // console.log('urltest', containerUri, certifListStored)

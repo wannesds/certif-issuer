@@ -5,6 +5,7 @@ import {
     getDatetime,
 } from "@inrupt/solid-client";
 import {getCertifList} from '../utils/getCertifList'
+import {getOrCreateHolderList} from '../utils/getOrCreateHolderList'
 
 // const TEXT_PREDICATE = "http://schema.org/text";
 // const CREATED_PREDICATE = "http://www.w3.org/2002/12/cal/ical#created";
@@ -15,37 +16,33 @@ import {getCertifList} from '../utils/getCertifList'
 
 function UserList({userListStored, setCertifListStored, session}){
 
+
     const handleClick = async (item) => {
-        console.log(item)
         const list = await getCertifList(item.url, session)
         setCertifListStored(list)
-        console.log(list)
     }
 
    
     return(
         <div className="table-container">
             <span className="tasks-message">
-            Users: {userListStored.length}
+            Holders: {userListStored.length}
             </span>
             <table className="table">
                 <thead>
                     <tr>
-                        <th>User</th>
+                        <th>Holders</th>
                     </tr>
                 </thead>
                 <tbody>
-                    { !userListStored ? <span>No users found</span>
+                    { !userListStored ? <span>No holders found</span>
                         : userListStored.map( (item, index) => 
-                            // <StoredItem 
-                            //     thing={item}
-                            //     key={index}
-                            // />
                             <div>
                                 <tr>
-                                    <td>{item.url}</td>
+                                    <td>{(item.url.split("/")[4]).slice(0, -4)}</td>
+                                    <button onClick={() => handleClick(item)}>Open</button>
                                 </tr>
-                                <button onClick={() => handleClick(item)}>Open</button>
+                                
                                 {console.log(item.url)}
                             </div>
                         )

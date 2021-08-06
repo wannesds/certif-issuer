@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import QueItem from '../components/queItem';
 
-function QueList({certifListQue, setCertifListQue, certifListStored, setCertifListStored, setUserListStored, session}){
+function QueList({certifListQue, setCertifListQue, setCertifListStored, setUserListStored, session}){
    
     console.log("quelist certifListQue : ", certifListQue)
     return(
@@ -23,7 +23,6 @@ function QueList({certifListQue, setCertifListQue, certifListStored, setCertifLi
                             <QueItem 
                                 id={index} 
                                 data={item} 
-                                certifListStored={certifListStored}
                                 setCertifListStored={setCertifListStored}
                                 certifListQue={certifListQue}
                                 setCertifListQue={setCertifListQue}
