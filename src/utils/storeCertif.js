@@ -5,16 +5,13 @@ import {
     createThing,
     getSourceUrl,
     saveSolidDatasetAt,
-    setThing,
-    getSolidDataset,
-    getThing,
-    getUrlAll
+    setThing
   } from "@inrupt/solid-client";
 import { AddReadAccess } from './addReadAccess';
-import { getOrCreateCertifList } from '../utils/getOrCreateCertifList';
+import { getOrCreateCertifFile } from './getOrCreateCertifFile';
 import { getOrCreateHolderList } from '../utils/getOrCreateHolderList';
+import { getPodUrl } from '../utils/getPodUrl';
 
-const STORAGE_PREDICATE = "http://www.w3.org/ns/pim/space#storage";
 const TEXT_PREDICATE = "http://schema.org/text";
 const CREATED_PREDICATE = "http://www.w3.org/2002/12/cal/ical#created";
 const SHA1_PREDICATE = "http://xmlns.com/foaf/0.1/sha1";
@@ -25,19 +22,12 @@ const CERTIFICATION_CLASS = "http://data.europa.eu/snb/credential/e34929035b";
 
 function StoreCertif(data, validTxn, setCertifListStored, setUserListStored, session) {
     const store = async () => {
-        try {
-            
-        const profileDataset = await getSolidDataset(session.info.webId, {
-            fetch: session.fetch,
-        });
-        const profileThing = getThing(profileDataset, session.info.webId);
-        const podsUrls = getUrlAll(profileThing, STORAGE_PREDICATE);
-        const pod = podsUrls[0];
+        try {      
+        const pod = await getPodUrl(session)
         const ttlUri = `${pod}certificates-issued/${data.webID.split("/")[2]}.ttl`
-        const certifList = await getOrCreateCertifList(ttlUri, session.fetch)
+        const certifList = await getOrCreateCertifFile(ttlUri, session.fetch)
 
-
-        //gets the chosen dataset to store things in
+        //gets the chosen dataset url to store things in
         const indexUrl = getSourceUrl(certifList);
         
         //creates a thing and adds triples to it each time needed using solid-client functions

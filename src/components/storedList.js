@@ -44,10 +44,13 @@ function StoredList({certifListStored}){
 
    
     return(
-        <div className="table-container">
-            <span className="table-message">
-            {!user ? "No Holder selected" : 
-                `${user} has ${certifThings.length} certificate${certifThings.length === 1 ? "" : "s"} issued.`
+        <div className="table-container certif-list">
+            <span className="table-message certif-list-message">
+            {!user ? "No Holders selected" : 
+                <span>
+                    <h4>{user}</h4>
+                    Certificates : {certifThings.length}
+                </span>
             }
             </span>
             <table className="table">

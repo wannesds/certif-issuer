@@ -4,7 +4,7 @@ import {
     saveSolidDatasetAt,
   } from "@inrupt/solid-client";
   
-export async function getOrCreateCertifList(indexUrl, fetch) {
+export async function getOrCreateCertifFile(indexUrl, fetch) {
   try {
     //finds the given dataset if available
     const certifList = await getSolidDataset(indexUrl, { fetch });

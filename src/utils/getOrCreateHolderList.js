@@ -5,25 +5,17 @@ import {
     saveSolidDatasetAt
   } from "@inrupt/solid-client";
   
-export async function getOrCreateHolderList(containerUri, fetch) {
-  const indexUrl = `${containerUri}`
+export async function getOrCreateHolderList(indexUrl, fetch) {
+  //finds all holder files of certif issued to holders
+  //if no folder found -> create 1
   try {
     //finds the given dataset if available
     const certifFolder = await getSolidDataset(indexUrl, { fetch })
-
+    //creates array of all found items ttl url's
     const ttlArray = getThingAll(certifFolder)
 
-
-    // const ttlUrlArray = [];
-    // //slice, first item is no ttl
-    // ttlArray.slice(1).forEach(ttl => {
-    //   ttlUrlArray.push(ttl)
-    // })
-    //creates array of the ttl url's
-    //slice first as its no ttl
-    console.log(certifFolder)
+    //slice first as its no real ttl
     return ttlArray.slice(1);
-    //return certifFolder;
 
   } catch (error) {
     if (error.statusCode === 404) {

@@ -2,8 +2,8 @@ import './App.css';
 import './styles/styles.scss';
 import React, { useEffect, useState } from "react";
 import { LoginButton, LogoutButton, Text, useSession, CombinedDataProvider } from "@inrupt/solid-ui-react";
-import { getSolidDataset, getUrlAll, getThing } from "@inrupt/solid-client";
 import { getOrCreateHolderList } from "./utils/getOrCreateHolderList";
+import { getPodUrl } from "./utils/getPodUrl";
 import StoredList from "./components/storedList";
 import UserList from "./components/userList";
 import QueList from "./components/queList";
@@ -31,12 +31,8 @@ function App() {
   useEffect(() => {
     if (!session || !session.info.isLoggedIn) return;
     (async () => {
-      const profileDataset = await getSolidDataset(session.info.webId, {
-        fetch: session.fetch,
-      });
-      const profileThing = getThing(profileDataset, session.info.webId);
-      const podsUrls = getUrlAll(profileThing, STORAGE_PREDICATE);
-      const pod = podsUrls[0]
+      
+      const pod = await getPodUrl(session)
       const containerUri = `${pod}certificates-issued/`;
       const holders = await getOrCreateHolderList(containerUri, session.fetch);
       setUserListStored(holders);
@@ -80,18 +76,21 @@ function App() {
           datasetUrl={session.info.webId}
           thingUrl={session.info.webId}
         >
-          <div className="message logged-in">
-            <span>You are logged in as: </span>
-              <Text 
-                properties={[
+          <div className="header logged-in">
+            <div className="message">
+              <span>Welcome, </span>
+                <Text 
+                  properties={[
                   "http://www.w3.org/2006/vcard/ns#fn",
                   "http://xmlns.com/foaf/0.1/name",
                 ]} 
-                className=""
               />
-              <LogoutButton
-                onLogout={() => window.location.reload()}
-              />
+              <span>( {session.info.webId} )</span>
+            </div>
+            
+            <LogoutButton className="logout-button"
+              onLogout={() => window.location.reload()}
+            />
           </div>
           <div className="content">
             <h3>Local Data</h3>
