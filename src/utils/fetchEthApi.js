@@ -7,6 +7,7 @@ export async function FetchEthApi(apiOption) {
 
         return res;
     } catch (error) {
+        
         console.log("Etherscan API couldn't fetch")
 
         return null;
