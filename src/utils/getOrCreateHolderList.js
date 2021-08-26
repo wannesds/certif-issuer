@@ -20,9 +20,8 @@ export async function getOrCreateHolderList(indexUrl, fetch) {
   } catch (error) {
     if (error.statusCode === 404) {
       //if no folder found, create one
-      const indexUrlDefault = `${indexUrl}`
       const certifList = await saveSolidDatasetAt(
-        indexUrlDefault,
+        indexUrl,
         createSolidDataset(),
         {
           fetch,

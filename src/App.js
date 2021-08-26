@@ -92,6 +92,7 @@ function App() {
               onLogout={() => window.location.reload()}
             />
           </div>
+          
           <div className="content">
             <h3>Local Data</h3>
             <div className="local-content">        

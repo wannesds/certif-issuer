@@ -40,7 +40,6 @@ function StoreCertif(data, validTxn, setCertifListStored, setUserListStored, ses
         //updates certification list with newly added thing
         const updatedCertifList = setThing(certifList, certifWithType);
         //saves dataset on Pod
-        
         const updatedDataset = await saveSolidDatasetAt(indexUrl, updatedCertifList, {
             fetch: session.fetch,
         });
