@@ -60,12 +60,14 @@ background: linear-gradient(160deg, $cyan1 0%, $cyan2 100%);
     flex-wrap: wrap;
     //justify-content:space-between;
     border: $border1 solid 2px;
+    border-radius: 8px;
     padding: 0.5em;
     background-color: $white2;
 }
 .solid-content {
     //background-color:rgba(55, 190, 190, 0.856);
     border: $border1 solid 2px;
+    border-radius: 8px;
     display: flex;
     flex-wrap: wrap;
     //justify-content: space-between;
@@ -121,7 +123,8 @@ background: linear-gradient(160deg, $cyan1 0%, $cyan2 100%);
     padding: 0.3em;
     border: solid 0.1em $border1;
     border-top:none;
-    border-radius: 0em;
+    border-radius: 5px;
+    margin-bottom: 0.5em;
     width: 90%;
     @include gradient1;
     &:hover {

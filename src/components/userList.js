@@ -5,6 +5,7 @@ function UserList({userListStored, setCertifListStored, session}){
 
     const handleClick = async (item) => {
         const list = await getCertifList(item.url, session)
+        console.log('userList-list : ', list)
         setCertifListStored(list)
     }
     console.log("holders",userListStored)

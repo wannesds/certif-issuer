@@ -32,7 +32,7 @@ function StoredList({certifListStored}){
         const rawUrl = certifThings[0].url.split("/")[4];
         user = rawUrl.split("#")[0].slice(0, -4);
     }
-    console.log("TEST", user)
+    console.log("certifThings", certifThings)
 
     // const thingsArray = certifThings
     //     //filters for todo-type predicates, (don't think this is needed in current version) but it can be an extra check
@@ -64,11 +64,11 @@ function StoredList({certifListStored}){
                 </thead>
                 <tbody>
                     { !certifThings ? <span>No certificates stored</span>
-                        : certifThings.map( (item, index) => 
+                        : certifThings.map( (thing, index) => 
                             <StoredItem 
-                                thing={item}
+                                thing={thing}
                                 key={index}
-                            />
+                            />,
                         )
                     }
                 </tbody>
