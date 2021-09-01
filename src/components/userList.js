@@ -17,7 +17,7 @@ function UserList({userListStored, setCertifListStored, session}){
                 : userListStored.length}
             </span>
             <div className="table holder-list">
-                { !userListStored ? <span>No holders found</span>
+                { !userListStored.length > 0 ? <span>No holders found</span>
                     : userListStored.map( (item, index) => 
                         <div onClick={() => handleClick(item)} className="holder"> 
                             {(item.url.split("/")[4]).slice(0, -4)}
