@@ -41,6 +41,7 @@ function AddCertif({ setCertifListQue }) {
             id="webID-input"
             type="text"
             //value={todoText}
+            placeholder='ksbuser.solidcommunity.net'
             onChange={handleChange}
           />
         </label>
