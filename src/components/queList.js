@@ -13,7 +13,7 @@ function QueList({certifListQue, setCertifListQue, setCertifListStored, setUserL
                 <thead>
                     <tr>
                         <th>Certificate</th>
-                        <th>WebID</th>
+                        <th>Holder</th>
                         <th>Valid</th>
                     </tr>
                 </thead>

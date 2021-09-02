@@ -8,6 +8,8 @@ import StoredList from "./components/storedList";
 import UserList from "./components/userList";
 import QueList from "./components/queList";
 import AddCertif from "./components/addCertif";
+import { createAddressFile } from './utils/createAddressFile';
+import  storeAddress  from './utils/storeAddress';
 
 const STORAGE_PREDICATE = "http://www.w3.org/ns/pim/space#storage";
 
@@ -23,6 +25,7 @@ function App() {
   const [userListStored, setUserListStored] = useState("");
   const [certifListStored, setCertifListStored] = useState("");
   const [certifListQue, setCertifListQue] = useState("");
+  const [podUrl, setPodUrl] = useState("");
 
   const handleChange = (event) => {
     setOidcIssuer(event.target.value);
@@ -33,6 +36,7 @@ function App() {
     (async () => {
       
       const pod = await getPodUrl(session)
+      setPodUrl(pod)
       const containerUri = `${pod}certificates-issued/`;
       const holders = await getOrCreateHolderList(containerUri, session.fetch);
       setUserListStored(holders);
@@ -46,7 +50,10 @@ function App() {
                 // Request account access if needed
                 await window.ethereum.enable();
                 // Acccounts now exposed
-    
+                const indexUrl = `${pod}public/eth-address.ttl`
+                const addressDataset = await createAddressFile(indexUrl, session.fetch)
+                console.log("addressDataset?", addressDataset)
+                await storeAddress(indexUrl, session.fetch, addressDataset, window.ethereum.selectedAddress)
             } catch (error) {
                 // User denied account access...
             }
@@ -97,8 +104,9 @@ function App() {
             <h3>Local Data</h3>
             <div className="local-content">        
               <AddCertif 
-                certifListQue={certifListQue} 
+                //certifListQue={certifListQue} 
                 setCertifListQue={setCertifListQue}
+                podUrl={podUrl}
               />
               <QueList 
                 certifListQue={certifListQue} 

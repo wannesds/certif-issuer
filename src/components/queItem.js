@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { SendTxn } from '../utils/sendTxn';
 import  CheckIfValid  from '../utils/checkIfValid';
 import StoreCertif from '../utils/storeCertif';
+import { getPodUrl } from '../utils/getPodUrl';
 
 import { 
     getThingAll, 

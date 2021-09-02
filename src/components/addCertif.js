@@ -1,14 +1,17 @@
+import { setGroupDefaultAccess } from "@inrupt/solid-client";
 import React, {useState } from "react";
 
-function AddCertif({ setCertifListQue }) {
+function AddCertif({ setCertifListQue, podUrl }) {
   const [certifID, setCertifID] = useState("");
   const [webID, setWebID] = useState("");
+ 
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const newCertif = {
       certifID : certifID,
-      webID : webID
+      webID : webID,
+      issuerID: podUrl
     }
     
     setCertifListQue(certifListQue => [...certifListQue, newCertif])

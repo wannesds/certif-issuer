@@ -57,7 +57,7 @@ function StoredList({certifListStored}){
                 <thead>
                     <tr>
                         <th>Certificate</th>
-                        <th>WebID</th>
+                        {/* <th>WebID</th> */}
                         {/* <th>Validation Hash</th> */}
                         <th>Created</th>
                     </tr>

@@ -9,8 +9,8 @@ import {
   } from "@inrupt/solid-client";
 import { AddReadAccess } from './addReadAccess';
 import { getOrCreateCertifFile } from './getOrCreateCertifFile';
-import { getOrCreateHolderList } from '../utils/getOrCreateHolderList';
-import { getPodUrl } from '../utils/getPodUrl';
+import { getOrCreateHolderList } from './getOrCreateHolderList';
+import { getPodUrl } from './getPodUrl';
 
 const TEXT_PREDICATE = "http://schema.org/text";
 const CREATED_PREDICATE = "http://www.w3.org/2002/12/cal/ical#created";
@@ -34,9 +34,11 @@ function StoreCertif(data, validTxn, setCertifListStored, setUserListStored, ses
         const certifWithText = addStringNoLocale(createThing(), TEXT_PREDICATE, data.certifID);
         const certifWithDate = addDatetime(certifWithText, CREATED_PREDICATE, new Date() );
         const certifWithHash = addStringNoLocale(certifWithDate, SHA1_PREDICATE, validTxn.hash);
-        const certifWithPerson = addStringNoLocale(certifWithHash, PERSON_PREDICATE, data.webID);
+        //const certifWithHolder = addStringNoLocale(certifWithHash, PERSON_PREDICATE, data.webID);
+        const certifWithIssuer = addStringNoLocale(certifWithHash, PERSON_PREDICATE, data.issuerID);
+
         //adds correct class
-        const certifWithType = addUrl(certifWithPerson, TYPE_PREDICATE, CERTIFICATION_CLASS);
+        const certifWithType = addUrl(certifWithIssuer, TYPE_PREDICATE, CERTIFICATION_CLASS);
         //updates certification list with newly added thing
         const updatedCertifList = setThing(certifList, certifWithType);
         //saves dataset on Pod
